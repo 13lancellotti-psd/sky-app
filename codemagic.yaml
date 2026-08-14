@@ -1,0 +1,37 @@
+workflows:
+  ios-workflow:
+    name: iOS Build - Sky App
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.lancellotti.skyapp
+      vars:
+        BUNDLE_ID: "com.lancellotti.skyapp"
+        APP_STORE_ID: "sky-app"
+      node: 18
+    scripts:
+      - name: Install npm dependencies
+        script: |
+          npm install
+      - name: Install Expo CLI and EAS CLI
+        script: |
+          npm install -g expo-cli eas-cli
+      - name: Prebuild iOS project
+        script: |
+          npx expo prebuild --platform ios --clean
+      - name: Set up code signing
+        script: |
+          xcode-project use-profiles
+      - name: Build iOS app
+        script: |
+          xcode-project build-ipa \
+            --workspace ios/*.xcworkspace \
+            --scheme skyapp
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
