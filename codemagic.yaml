@@ -5,19 +5,18 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       ios_signing:
-        distribution_type: app_store
+        distribution_type: development
         bundle_identifier: com.lancellotti.skyapp
       vars:
         BUNDLE_ID: "com.lancellotti.skyapp"
-        APP_STORE_ID: "sky-app"
       node: 18
     scripts:
       - name: Install npm dependencies
         script: |
           npm install
-      - name: Install Expo CLI and EAS CLI
+      - name: Install Expo CLI
         script: |
-          npm install -g expo-cli eas-cli
+          npm install -g expo-cli
       - name: Prebuild iOS project
         script: |
           npx expo prebuild --platform ios --clean
@@ -31,7 +30,3 @@ workflows:
             --scheme skyapp
     artifacts:
       - build/ios/ipa/*.ipa
-    publishing:
-      app_store_connect:
-        auth: integration
-        submit_to_testflight: true
