@@ -1,17 +1,32 @@
 {
   "expo": {
-    "name": "sky-app",
+    "name": "Sky - Assistente Virtual",
     "slug": "sky-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F0F1E"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lancellotti.skyapp",
+      "infoPlist": {
+        "NSSpeechRecognitionUsageDescription": "Sky precisa acessar o microfone para reconhecimento de voz.",
+        "NSMicrophoneUsageDescription": "Sky precisa do microfone para você conversar com ela."
+      }
     },
     "android": {
+      "package": "com.lancellotti.skyapp",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.INTERNET"
+      ],
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0F0F1E",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -19,6 +34,22 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-speech-recognition",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "16.4"
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "sky-assistente"
+      }
     }
   }
 }

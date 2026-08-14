@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "@react-native-voice/voice": "^3.2.4",
     "expo": "~57.0.12",
+    "expo-av": "^16.0.8",
+    "expo-build-properties": "~57.0.11",
+    "expo-permissions": "^14.4.0",
+    "expo-speech": "~57.0.1",
+    "expo-speech-recognition": "^56.0.1",
     "expo-status-bar": "~57.0.1",
     "react": "19.2.3",
     "react-native": "0.86.2"
